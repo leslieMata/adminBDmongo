@@ -1,7 +1,10 @@
 <?php
+  session_start();
   require_once "clases/Crud.php";
   $obj = new Crud();
   $datos = $obj->mostrar();
+  $mensaje = @$obj->mensajeCrud($_SESSION['mensaje_crud']);
+  unset($_SESSION['mensaje_crud']);
   //  echo "<pre>";
   //    print_r($datos);
   // echo "</pre>";
@@ -15,7 +18,7 @@
       <a href="agregar.php" class="btn btn-primary"> Agregar persona <i class="far fa-address-book"></i></a> 
       <hr>
       <div class="table-responsive">
-        <table class="table table-hover table-sm table-bordered">
+        <table class="table table-hover table-sm table-bordered" id="datatableMongo">
           <thead>
             <th class="text-center">Nombre(s)</th>
             <th class="text-center">Apellido paterno</th>
@@ -55,3 +58,7 @@
 </div>
 
 <?php require_once 'scripts.php'; ?>
+<script>
+  let mensaje = <?php echo $mensaje;?>;
+  console.log(mensaje);
+</script>
